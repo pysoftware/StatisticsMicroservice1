@@ -16,38 +16,27 @@ import java.util.Date;
 @Table(name = "latest_statistics")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Statistics {
+public class UsersStatistics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private Long Id;
-
-    @Column(name = "description")
-    @Getter
-    @Setter
-    @NotBlank
-    @NotEmpty
-    @NotNull
-    private String description;
+    private Long id;
 
     @Column(name = "created_at")
     @Getter
     @Setter
-    private Date date;
+    private Date createdAt;
 
-    @Column(name = "email")
+    @Column(name = "user_id")
     @Getter
     @Setter
-    @NotBlank
-    @NotEmpty
-    @NotNull
-    private String email;
+    private Long userId;
 
     @PrePersist
     private void getTimeOperation() {
-        this.date = new Date();
+        this.createdAt = new Date();
     }
 
 }

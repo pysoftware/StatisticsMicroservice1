@@ -9,7 +9,8 @@ public class JsonResponseBody {
 
     @Getter
     @Setter
-    private  int server;
-    @Getter @Setter
+    private int server;
+    @Getter
+    @Setter
     private Object response;
 }
