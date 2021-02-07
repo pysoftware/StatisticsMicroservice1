@@ -11,9 +11,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-//VALIDATION JSR-303 -> Hibernate validator
-// DATA BINDING (email, name, password) -> new User(email, name, password)
-
 @Entity
 @Table(name = "users")
 @Data
@@ -53,8 +50,10 @@ public class User {
 
 
     @OneToMany(
-        mappedBy = "user",
-        fetch = FetchType.LAZY
+            mappedBy = "user",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private List<ToDo> toDoList;
 

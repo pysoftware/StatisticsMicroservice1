@@ -45,7 +45,10 @@ public class AuthServiceImpl implements AuthService {
     }
 
     public String tryLogIn(User tryingUser) throws UserNotLoggedException {
-        Optional<User> user = userRepository.findFirstUserByEmailAndPassword(tryingUser.getEmail(), DigestUtils.md5Hex(tryingUser.getPassword()));
+        Optional<User> user = userRepository.findFirstUserByEmailAndPassword(
+                tryingUser.getEmail(),
+                DigestUtils.md5Hex(tryingUser.getPassword())
+        );
         if (user.isPresent()) {
             return this.generateJwtToken(user.get());
         } else {
@@ -59,14 +62,14 @@ public class AuthServiceImpl implements AuthService {
         expirationTokenTime.setTime(expirationTokenTime.getTime() + (300 * 1000));
         Key key = Keys.hmacShaKeyFor(JWT_SECRET_KEY.getBytes());
         return Jwts.builder()
-            .setSubject(user.getEmail())
-            .setExpiration(expirationTokenTime)
-            .addClaims(Map.of(
-                "name", user.getName(),
-                "id", user.getId()
-            ))
-            .signWith(key)
-            .compact();
+                .setSubject(user.getEmail())
+                .setExpiration(expirationTokenTime)
+                .addClaims(Map.of(
+                        "name", user.getName(),
+                        "id", user.getId()
+                ))
+                .signWith(key)
+                .compact();
     }
 
 

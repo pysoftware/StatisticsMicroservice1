@@ -6,11 +6,11 @@ import org.springframework.http.HttpStatus;
 
 @AllArgsConstructor
 public class SimpleMessageResponse extends CustomResponse {
-    public SimpleMessageResponse(HttpStatus httpStatus, String message) {
+    public SimpleMessageResponse(HttpStatus httpStatus, Object message) {
         super(httpStatus);
         this.message = message;
     }
 
     @Getter
-    private final String message;
+    private final Object message;
 }

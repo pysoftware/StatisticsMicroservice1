@@ -34,14 +34,14 @@ public class LoginController {
         this.authService = authService;
     }
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login")
     public ResponseEntity<?> login(
-        @Valid User user,
-        BindingResult bindingResult
+            @Valid User user,
+            BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(UNAUTHORIZED)
-                .body(new ValidationErrorResponse(UNAUTHORIZED, bindingResult.getFieldErrors()));
+                    .body(new ValidationErrorResponse(UNAUTHORIZED, bindingResult.getFieldErrors()));
         }
 
         try {
@@ -49,7 +49,7 @@ public class LoginController {
             return ResponseEntity.ok(new JwtResponse(OK, jwtToken));
         } catch (UserNotLoggedException exception) {
             return ResponseEntity.status(UNAUTHORIZED)
-                .body(new SimpleMessageResponse(UNAUTHORIZED, exception.getMessage()));
+                    .body(new SimpleMessageResponse(UNAUTHORIZED, exception.getMessage()));
         }
     }
 

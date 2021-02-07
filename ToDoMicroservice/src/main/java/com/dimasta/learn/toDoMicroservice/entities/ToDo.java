@@ -1,6 +1,7 @@
 package com.dimasta.learn.toDoMicroservice.entities;
 
 import com.dimasta.learn.toDoMicroservice.utilities.ToDoPriority;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -11,30 +12,36 @@ import java.util.Date;
 @Table(name = "todos")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"user"})
 public class ToDo {
 
     @Id
-    @Getter @Setter
+    @Getter
+    @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "description")
-    @Getter @Setter
+    @Getter
+    @Setter
     @NotEmpty
     private String description;
 
     @Column(name = "created_at")
-    @Getter @Setter
+    @Getter
+    @Setter
     private Date createdAt;
 
-    @Column(name = "priority")
-    @Getter @Setter
+    @Column(name = "priority", nullable = false)
+    @Getter
+    @Setter
     @Enumerated(EnumType.STRING)
     private ToDoPriority priority;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @Setter @Getter
+    @Setter
+    @Getter
     private User user;
 
     @PrePersist

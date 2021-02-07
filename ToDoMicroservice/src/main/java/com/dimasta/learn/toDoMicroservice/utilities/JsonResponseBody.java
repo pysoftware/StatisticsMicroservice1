@@ -9,10 +9,3 @@ public class JsonResponseBody {
     private  int status;
     private Object response;
 }
-
-
-//http response -> java object ResponseEntity<JsonResponseBody>
-
-//header (jwt)
-
-//body - html page or a JsonMessage(JsonResponseBody(int server, Object response))

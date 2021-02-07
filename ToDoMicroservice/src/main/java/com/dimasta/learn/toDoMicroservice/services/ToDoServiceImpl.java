@@ -15,13 +15,13 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    public ToDo addToDo(ToDo toDo, User user){
+    public ToDo addToDo(ToDo toDo, User user) {
         toDo.setUser(user);
         return toDoRepository.save(toDo);
     }
 
     @Override
-    public void deleteToDo(Long id){
-        toDoRepository.delete(id);
+    public void deleteToDo(Long toDoId, User user) {
+        toDoRepository.deleteToDoByIdAndUserId(toDoId, user.getId());
     }
 }

@@ -6,5 +6,5 @@ import com.dimasta.learn.toDoMicroservice.entities.User;
 public interface ToDoService {
     ToDo addToDo(ToDo toDo, User user);
 
-    void deleteToDo(Long id);
+    void deleteToDo(Long toDoId, User user);
 }
